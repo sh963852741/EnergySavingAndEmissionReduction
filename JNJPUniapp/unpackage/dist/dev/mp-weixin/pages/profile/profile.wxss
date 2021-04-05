@@ -1,0 +1,16 @@
+
+.vertical-divider > .text-block + .text-block{
+	border-left: #e7ebed solid 2rpx;
+}
+.vertical-divider >.text-block{
+	width: 100%;
+}
+.head {
+	height: 486rpx;
+	width: 100%;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	/* filter: blur(8px); */
+}
+

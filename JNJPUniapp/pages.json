@@ -1,0 +1,46 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "化妆品回收小程序"
+			}
+		},
+		{
+			"path": "pages/recycling/confirm",
+			"style": {
+				"navigationBarTitleText": "确认分类"
+			}
+		},
+		{
+			"path": "pages/recycling/conduct",
+			"style": {
+				"navigationBarTitleText": "回收信息确认"
+			}
+		},
+		{
+			"path": "pages/recycling/success",
+			"style": {
+				"navigationBarTitleText": "回收成功"
+			}
+		},
+		{
+			"path": "pages/article/list",
+			"style": {
+				"navigationBarTitleText": "通知公告"
+			}
+		},
+		{
+			"path": "pages/profile/profile",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		}
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	}
+}
