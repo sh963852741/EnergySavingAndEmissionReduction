@@ -3,7 +3,12 @@
 		<form>
 			<view class="cu-form-group">
 				<view class="title">化妆品分类</view>
-				<input value="膏霜乳液类"></input>
+				<picker mode="multiSelector" @change="handleChange" @columnchange="handleColumnChange" range-key="name" :value="categoryIndex" :range="categoryArray">
+					<view class="picker">
+						{{categoryIndex[0] > -1 ? categoryArray[0][categoryIndex[0]].name : '请选择'}} >> 
+						{{categoryIndex[1] > -1 ?categoryArray[1][categoryIndex[1]].name : '请选择'}}
+					</view>
+				</picker>
 			</view>
 			<view class="cu-form-group">
 				<view class="title">化妆品重量</view>
@@ -33,12 +38,27 @@
 	export default {
 		data() {
 			return {
+				categoryIndex: [-1, -1],
 				formData: {
 					category: "膏霜乳液类"
-				}
+				},
+				categoryArray: [[],[]],
+				source: [[],[]]
 			}
 		},
 		onLoad() {
+			uni.get('/api/category/GetCategory', {},msg => {
+				if(msg.success){
+					this.source = JSON.parse(JSON.stringify(msg.data));
+					for(let category of msg.data){
+						for(let s of category.subCategories){
+							this.categoryArray[1].push(s);
+							}
+						delete category.subCategories;
+						this.categoryArray[0].push(category);
+					}
+				}
+			})
 			uni.showModal({
 				title: "开始回收",
 				content: "请将化妆品放入回收箱。",
@@ -46,6 +66,14 @@
 			})
 		},
 		methods: {
+			handleChange(e) {
+				this.categoryIndex = e.detail.value
+			},
+			handleColumnChange(e) {
+				if(e.detail.column === 0){
+					this.categoryArray[1] = this.source[e.detail.value].subCategories;
+				}
+			},
 			recycle() {
 				uni.redirectTo({
 					url: './success'

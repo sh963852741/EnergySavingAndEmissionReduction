@@ -1,0 +1,10 @@
+.box {
+    height: 80vh;
+    border: 3px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.box .state {
+    font-size: x-large;
+}

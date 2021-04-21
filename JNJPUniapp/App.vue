@@ -1,13 +1,31 @@
 <script>
 	export default {
 		onLaunch: function() {
-			console.log('App Launch')
+
 		},
 		onShow: function() {
-			console.log('App Show')
+			// #ifndef H5
+			uni.getUserInfo({
+				success: (res) => {
+					let userInfo = res.userInfo;
+					uni.login({
+						success: (res) => {
+							uni.post("/api/security/WeChatLogin",{code: res.code, name: userInfo.nickName}, msg => {
+								console.log(msg)
+							})
+						},
+						fail: (err) => {
+							console.error(err)
+						}
+					})
+				}
+			})
+			
+			// #endif
+			
 		},
 		onHide: function() {
-			console.log('App Hide')
+
 		}
 	}
 </script>

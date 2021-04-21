@@ -3,9 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31105.61
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JNJPBackEnd", "JNJPBackEnd\JNJPBackEnd.csproj", "{ADF822B5-D0A4-422C-B881-DE0C3B4A80DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JNJPBackEnd", "JNJPBackEnd\JNJPBackEnd.csproj", "{ADF822B5-D0A4-422C-B881-DE0C3B4A80DF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A7D6C673-D2D8-4366-B3B9-4538BCA807F1} = {A7D6C673-D2D8-4366-B3B9-4538BCA807F1}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Security", "Security\Security.csproj", "{A7D6C673-D2D8-4366-B3B9-4538BCA807F1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Security", "Security\Security.csproj", "{A7D6C673-D2D8-4366-B3B9-4538BCA807F1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

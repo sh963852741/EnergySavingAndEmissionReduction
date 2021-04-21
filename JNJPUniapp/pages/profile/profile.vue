@@ -20,7 +20,7 @@
 		</view>
 		<view class="cu-list menu card-menu margin-top-xl">
 			<view class="cu-item arrow">
-				<view class="content">
+				<view class="content" @click="navTo('myrecycle')">
 					<text class="cuIcon-refresh text-green"></text>
 					<text class="text-grey">我的回收</text>
 				</view>
@@ -45,6 +45,13 @@
 				userAvatar,
 				bgImg
 			} 
+		},
+		methods:{
+			navTo(url) {
+				uni.navigateTo({
+					url
+				})
+			}
 		}
 	}
 </script>

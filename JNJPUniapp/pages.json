@@ -35,6 +35,12 @@
 			"style": {
 				"navigationStyle": "custom"
 			}
+		},
+		{
+			"path": "pages/profile/myrecycle",
+			"style": {
+				"navigationBarTitleText": "回收历史"
+			}
 		}
     ],
 	"globalStyle": {
