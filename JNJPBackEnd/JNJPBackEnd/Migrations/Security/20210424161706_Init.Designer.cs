@@ -7,10 +7,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Security;
 
-namespace Security.Migrations
+namespace JNJPBackEnd.Migrations.Security
 {
     [DbContext(typeof(SecurityContext))]
-    [Migration("20210412130731_Init")]
+    [Migration("20210424161706_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

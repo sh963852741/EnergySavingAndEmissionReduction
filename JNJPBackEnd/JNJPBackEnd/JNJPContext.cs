@@ -24,6 +24,12 @@ namespace JNJPBackEnd
                 .HasForeignKey(d => d.ParentID)
                 .IsRequired(false);
 
+            modelBuilder.Entity<RecycleForm>()
+                .HasOne(e => e.User)
+                .WithMany()
+                .HasForeignKey(e => e.UserID)
+                .HasPrincipalKey(e => e.ID);
+
             base.OnModelCreating(modelBuilder);
         }
     }

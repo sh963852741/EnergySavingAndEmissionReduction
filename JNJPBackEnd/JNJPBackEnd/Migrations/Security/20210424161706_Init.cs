@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Security.Migrations
+namespace JNJPBackEnd.Migrations.Security
 {
     public partial class Init : Migration
     {

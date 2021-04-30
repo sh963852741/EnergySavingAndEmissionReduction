@@ -34,13 +34,14 @@ namespace JNJPBackEnd
             services.AddDbContext<JNJPContext>(opt =>
                                                opt.UseSqlServer(Configuration.GetConnectionString("DefaultDatabase")));
             services.AddDbContext<SecurityContext>(opt =>
-                                               opt.UseSqlServer(Configuration.GetConnectionString("DefaultDatabase")));
+                                               opt.UseSqlServer(Configuration.GetConnectionString("DefaultDatabase"), b => b.MigrationsAssembly("JNJPBackEnd")
+                                               ));
 
             services.AddControllers().AddNewtonsoftJson();
             services.AddSignalR();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "节能减排大赛",Description = "节能减排大赛的后端API列表", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "节能减排大赛", Description = "节能减排大赛的后端API列表", Version = "v1" });
             });
             services.AddHttpContextAccessor();
             services.AddSingleton<IAuthenticationService, AuthenticationService>();
@@ -60,6 +61,8 @@ namespace JNJPBackEnd
             }
 
             app.UseHttpsRedirection();
+
+            app.UseStaticFiles();
 
             app.UseRouting();
 

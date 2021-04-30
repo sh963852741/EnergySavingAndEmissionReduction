@@ -101,6 +101,9 @@ namespace JNJPBackEnd.Migrations
                     b.Property<string>("RecycleMethod")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("State")
+                        .HasColumnType("int");
+
                     b.Property<string>("SubCategoryName")
                         .HasColumnType("nvarchar(max)");
 
@@ -115,7 +118,50 @@ namespace JNJPBackEnd.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasIndex("CategoryID");
+
+                    b.HasIndex("UserID");
+
                     b.ToTable("RecycleForms");
+                });
+
+            modelBuilder.Entity("Security.Modules.Permission", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("UserID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("Permissions");
+                });
+
+            modelBuilder.Entity("Security.Modules.User", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OpenID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("JNJPBackEnd.Modules.Category", b =>
@@ -136,9 +182,40 @@ namespace JNJPBackEnd.Migrations
                     b.Navigation("Category");
                 });
 
+            modelBuilder.Entity("JNJPBackEnd.Modules.RecycleForm", b =>
+                {
+                    b.HasOne("JNJPBackEnd.Modules.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Security.Modules.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Security.Modules.Permission", b =>
+                {
+                    b.HasOne("Security.Modules.User", null)
+                        .WithMany("Permissions")
+                        .HasForeignKey("UserID");
+                });
+
             modelBuilder.Entity("JNJPBackEnd.Modules.Category", b =>
                 {
                     b.Navigation("SubCategories");
+                });
+
+            modelBuilder.Entity("Security.Modules.User", b =>
+                {
+                    b.Navigation("Permissions");
                 });
 #pragma warning restore 612, 618
         }

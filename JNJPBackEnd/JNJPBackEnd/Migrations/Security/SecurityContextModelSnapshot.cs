@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Security;
 
-namespace Security.Migrations
+namespace JNJPBackEnd.Migrations.Security
 {
     [DbContext(typeof(SecurityContext))]
     partial class SecurityContextModelSnapshot : ModelSnapshot

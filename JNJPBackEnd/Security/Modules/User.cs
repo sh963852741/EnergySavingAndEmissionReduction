@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Security.Modules
 {
+    [Table("Users")]
     public class User
     {
         public Guid ID { get; set; }

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>化妆品回收箱模拟器</title>
+    <script src="js/jquery/jquery.js"></script>
+    <script src="js/signalr/dist/browser/signalr.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/box.css">
+</head>
+
+<body>
+    <div>
+        <div class="box">
+            <div class="state" id="state-text">箱子关闭</div>
+        </div>
+        <div class="form">
+            <input id="form-id" type="text" />
+            <input id="maquillage-weight" type="number" />
+        </div>
+    </div>
+    <div style="display: flex; justify-content: space-around; margin-top: 24px;">
+        <button id="open-box-button">打开箱子</button>
+        <button id="close-box-button">关闭箱子</button>
+    </div>
+    <script type="text/javascript">
+        let connection = new signalR.HubConnectionBuilder().withUrl("/hub").build();
+
+        connection.on("OpenBox", function (formId) {
+            alert("收到后端消息，打开箱子" + "表单ID为" + formId);
+            $("#state-text").text("箱子打开");
+            $("#form-id").val(formId);
+        });
+
+        connection.on("Confirm", function () {
+            alert("得到后端确认，表单已经提交！");
+        });
+
+        connection.start().then(function () {
+            alert("成功连接服务器，等待指令...");
+        }).catch(function (err) {
+            return console.error(err.toString());
+        });
+
+        $(function () {
+            $("#open-box-button").hide()
+            $("#open-box-button").click(function () {
+                $("#state-text").text("箱子打开");
+            })
+            $("#close-box-button").click(function () {
+                let weight = $("#maquillage-weight").val();
+                let formId = $("#form-id").val();
+                connection.invoke("BoxClosed", formId, Number(weight)).catch(function (err) {
+                    return console.error(err.toString());
+                });
+                $("#state-text").text("箱子关闭");
+                alert(`已经向后端发送表单，ID：${formId}，重量：${weight}`);
+            })
+        })
+    </script>
+</body>
+
+</html>

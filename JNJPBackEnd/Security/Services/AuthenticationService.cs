@@ -40,8 +40,23 @@ namespace Security.Services
 
         public User GetCurrentUser()
         {
-            string token = _httpContextAccessor.HttpContext.Request.Cookies["token"];
+            string token;
+            token = _httpContextAccessor.HttpContext.Request.Cookies["token"];
+#if DEBUG
+            if(token == null)
+            {
+                return u;
+            }
+#endif
             return userPool[Guid.Parse(token)];
         }
+
+
+        private readonly User u = new()
+        {
+            ID = Guid.Parse("404D63C5-8B1F-4F7C-A8F0-08D904CB6845"),
+            Name = "宋润涵测试",
+            OpenID = "123456"
+        };
     }
 }
